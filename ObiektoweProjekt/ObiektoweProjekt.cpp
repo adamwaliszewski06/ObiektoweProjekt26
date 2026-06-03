@@ -130,6 +130,7 @@ public:
             to_string(friendly) + " " + getFavouriteToy() + " " +
 			haircut + " " + to_string(showDog) + " " + getOwnerName();
     }
+
 };
 
 class GoldenRetriever : public Dog {
@@ -1087,12 +1088,12 @@ void menu() {
 
     cout << "Available commands:\n";
     cout << "TREE                  - show class hierarchy\n";
-    cout << "DIR                   - list pets visible from current class node\n";
-    cout << "CD [class]            - change current class node\n";
+    cout << "DIR                   - list pets visible from current class node\n"; //directory
+    cout << "CD [class]            - change current class node\n"; //change directory 
 	cout << "SHOW [pet_name]       - show details of a pet, must be visible from current class node\n";
-    cout << "MO [pet_name]         - create a new pet in the current leaf class\n";
-    cout << "DO [pet_name]         - delete a pet from the current leaf class\n";
-    cout << "MDO [pet_name]        - modify a pet from the current leaf class\n";
+	cout << "MO [pet_name]         - create a new pet in the current leaf class\n"; // make object
+	cout << "DO [pet_name]         - delete a pet from the current leaf class\n"; // delete object
+	cout << "MDO [pet_name]        - modify a pet from the current leaf class\n"; // modify object
     cout << "SAVE [file_name]      - save pets to a file\n";
     cout << "READ [file_name]      - read pets from a file\n";
     cout << "EXIT                  - exit the program\n\n";
@@ -1129,8 +1130,6 @@ int main() {
 
     cout << "Welcome to the Pet Database program!\n";
     cout << "Sample pets have been loaded automatically.\n";
-    cout << "Use DIR to see pets visible from the current class node.\n";
-    cout << "Use TREE to see the full class hierarchy.\n";
     cout << "Press Enter to start...";
     cin.get();
 
@@ -1149,7 +1148,7 @@ int main() {
             cout << " (not a leaf - DIR and CD available, but not MO/DO/MDO)";
         }
 
-        cout << "\n> ";
+		cout << "\n> "; // wiersz poleceń, gdzie użytkownik wpisuje komendy
         getline(cin, line);
 
         ParsedCommand parsed = parseCommandLine(line);
