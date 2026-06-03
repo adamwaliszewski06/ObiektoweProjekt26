@@ -1,6 +1,11 @@
 ﻿#include <iostream>
 #include <string>
 #include <vector>
+#include <fstream> //zapis/odczyt z pliku
+#include <limits> //czyszczenie bufora wejścia 
+#include <sstream> 
+#include <algorithm> 
+#include <cctype> //toupper
 using namespace std;
 
 class Pet {
@@ -52,7 +57,7 @@ public:
     }
 
     void bark() const {
-        cout << name << ": woof!" << endl;
+        cout << name << ": woof!" <<endl;
     }
 
     string getFavouriteToy() const {
@@ -79,7 +84,7 @@ public:
     }
 
     void groom() {
-        cout << name << " has been groomed." << endl;
+        cout << name << " has been groomed." <<endl;
     }
 
     bool isShowDog() const {
@@ -92,13 +97,13 @@ public:
 
     void show() const override {
         cout << "Type: Poodle\n";
-        cout << "Name: " << name << "\n";
-        cout << "Age: " << age << "\n";
-        cout << "Friendly: " << friendly << "\n";
-        cout << "Favourite toy: " << getFavouriteToy() << "\n";
-        cout << "Haircut: " << haircut << "\n";
-        cout << "Show dog: " << showDog << "\n";
-        cout << "Owner name: " << getOwnerName() << "\n";
+        cout << "Name: " << name << endl;
+        cout << "Age: " << age << endl;
+        cout << "Friendly: " << friendly << endl;
+        cout << "Favourite toy: " << getFavouriteToy() << endl;
+        cout << "Haircut: " << haircut << endl;
+        cout << "Show dog: " << showDog << endl;
+        cout << "Owner name: " << getOwnerName() << endl;
     }
 
     void modify() override {
@@ -123,7 +128,7 @@ public:
     string serialize() const override {
         return "Poodle " + name + " " + to_string(age) + " " +
             to_string(friendly) + " " + getFavouriteToy() + " " +
-            haircut + " " + to_string(showDog);
+			haircut + " " + to_string(showDog) + " " + getOwnerName();
     }
 };
 
@@ -147,13 +152,13 @@ public:
 
     void show() const override {
         cout << "Type: Golden Retriever\n";
-        cout << "Name: " << name << "\n";
-        cout << "Age: " << age << "\n";
-        cout << "Friendly: " << friendly << "\n";
-        cout << "Favourite toy: " << getFavouriteToy() << "\n";
-        cout << "Likes swimming: " << likesSwimming << "\n";
-        cout << "Fetch skill: " << fetchSkill << "\n";
-        cout << "Owner name: " << getOwnerName() << "\n";
+        cout << "Name: " << name << endl;
+        cout << "Age: " << age << endl;
+        cout << "Friendly: " << friendly << endl;
+        cout << "Favourite toy: " << getFavouriteToy() << endl;
+        cout << "Likes swimming: " << likesSwimming << endl;
+        cout << "Fetch skill: " << fetchSkill << endl;
+        cout << "Owner name: " << getOwnerName() << endl;
     }
 
     void modify() override {
@@ -178,7 +183,7 @@ public:
     string serialize() const override {
         return "GoldenRetriever " + name + " " + to_string(age) + " " +
             to_string(friendly) + " " + getFavouriteToy() + " " +
-            to_string(likesSwimming) + " " + to_string(fetchSkill);
+			to_string(likesSwimming) + " " + to_string(fetchSkill) + " " + getOwnerName();
     }
 };
 
@@ -195,7 +200,7 @@ public:
     }
 
     void meow() const {
-        cout << name << " meow!" << endl;
+        cout << name << " meow!" <<endl;
     }
 
     void loseLife() {
@@ -233,13 +238,13 @@ public:
 
     void show() const override {
         cout << "Type: Domestic Shorthair\n";
-        cout << "Name: " << name << "\n";
-        cout << "Age: " << age << "\n";
-        cout << "Lives left (out of 9): " << livesLeft << "\n";
-        cout << "Likes boxes: " << getLikesBoxes() << "\n";
-        cout << "Fur colour: " << furColour << "\n";
-        cout << "Lives outdoors: " << livesOutdoors << "\n";
-        cout << "Owner name: " << getOwnerName() << "\n";
+        cout << "Name: " << name << endl;
+        cout << "Age: " << age << endl;
+        cout << "Lives left (out of 9): " << livesLeft << endl;
+        cout << "Likes boxes: " << getLikesBoxes() << endl;
+        cout << "Fur colour: " << furColour << endl;
+        cout << "Lives outdoors: " << livesOutdoors << endl;
+        cout << "Owner name: " << getOwnerName() << endl;
     }
 
     void modify() override {
@@ -264,7 +269,7 @@ public:
     string serialize() const override {
         return "DomesticShorthair " + name + " " + to_string(age) + " " +
             to_string(livesLeft) + " " + to_string(getLikesBoxes()) + " " +
-            furColour + " " + to_string(livesOutdoors);
+			furColour + " " + to_string(livesOutdoors) + " " + getOwnerName();
     }
 };
 
@@ -288,13 +293,13 @@ public:
 
     void show() const override {
         cout << "Type: Ragdoll\n";
-        cout << "Name: " << name << "\n";
-        cout << "Age: " << age << "\n";
-        cout << "Lives left (out of 9): " << livesLeft << "\n";
-        cout << "Likes boxes: " << getLikesBoxes() << "\n";
-        cout << "Likes cuddles: " << likesCuddles << "\n";
-        cout << "Floppiness: " << floppiness << "\n";
-        cout << "Owner name: " << getOwnerName() << "\n";
+        cout << "Name: " << name << endl;
+        cout << "Age: " << age << endl;
+        cout << "Lives left (out of 9): " << livesLeft << endl;
+        cout << "Likes boxes: " << getLikesBoxes() << endl;
+        cout << "Likes cuddles: " << likesCuddles << endl;
+        cout << "Floppiness: " << floppiness << endl;
+        cout << "Owner name: " << getOwnerName() << endl;
     }
 
     void modify() override {
@@ -319,7 +324,7 @@ public:
     string serialize() const override {
         return "Ragdoll " + name + " " + to_string(age) + " " +
             to_string(livesLeft) + " " + to_string(getLikesBoxes()) + " " +
-            to_string(likesCuddles) + " " + to_string(floppiness);
+			to_string(likesCuddles) + " " + to_string(floppiness) + " " + getOwnerName();
     }
 };
 
@@ -337,7 +342,7 @@ public:
     }
 
     void jump() const {
-        cout << name << " jumps!" << endl;
+        cout << name << " jumps!" <<endl;
     }
 
     int getLegSpan() const {
@@ -354,7 +359,7 @@ protected:
     int jumpDistance;
 
 private:
-    bool sentient; // hehe, Children of Time reference - great book, would recommend
+    bool sentient; // hehe, nawiązanie do Dzieci Czasu - polecam :P
 
 public:
     JumpingSpider(string name, int age, string ownerName, bool venomousToHumans,
@@ -369,13 +374,13 @@ public:
 
     void show() const override {
         cout << "Type: Jumping Spider\n";
-        cout << "Name: " << name << "\n";
-        cout << "Age: " << age << "\n";
-        cout << "Venomous to humans: " << venomousToHumans << "\n";
-        cout << "Leg span: " << getLegSpan() << "\n";
-        cout << "Jump distance: " << jumpDistance << "\n";
-        cout << "Sentient: " << sentient << "\n";
-        cout << "Owner name: " << getOwnerName() << "\n";
+        cout << "Name: " << name << endl;
+        cout << "Age: " << age << endl;
+        cout << "Venomous to humans: " << venomousToHumans << endl;
+        cout << "Leg span: " << getLegSpan() << endl;
+        cout << "Jump distance: " << jumpDistance << endl;
+        cout << "Sentient: " << sentient << endl;
+        cout << "Owner name: " << getOwnerName() << endl;
     }
 
     void modify() override {
@@ -400,7 +405,7 @@ public:
     string serialize() const override {
         return "JumpingSpider " + name + " " + to_string(age) + " " +
             to_string(venomousToHumans) + " " + to_string(getLegSpan()) + " " +
-            to_string(jumpDistance) + " " + to_string(sentient);
+			to_string(jumpDistance) + " " + to_string(sentient) + " " + getOwnerName();
     }
 };
 
@@ -421,13 +426,13 @@ public:
 
     void sing() const {
         if (canSing) {
-			cout << name << ": la-la-la " << endl; 
+			cout << name << ": la-la-la " <<endl; 
         }
     }
 
     void speak() const {
         if (canSpeak) {
-            cout << name << ": I can speak!" << endl;
+            cout << name << ": I can speak!" <<endl;
         }
     }
 
@@ -437,12 +442,12 @@ public:
 
     void show() const override {
         cout << "Type: Parrot\n";
-        cout << "Name: " << name << "\n";
-        cout << "Age: " << age << "\n";
-        cout << "Can sing: " << canSing << "\n";
-        cout << "Can speak: " << canSpeak << "\n";
-        cout << "Vocabulary size: " << vocabularySize << "\n";
-        cout << "Owner name: " << getOwnerName() << "\n";
+        cout << "Name: " << name << endl;
+        cout << "Age: " << age << endl;
+        cout << "Can sing: " << canSing << endl;
+        cout << "Can speak: " << canSpeak << endl;
+        cout << "Vocabulary size: " << vocabularySize << endl;
+        cout << "Owner name: " << getOwnerName() << endl;
     }
 
     void modify() override {
@@ -463,7 +468,7 @@ public:
     string serialize() const override {
         return "Parrot " + name + " " + to_string(age) + " " +
             to_string(canSing) + " " + to_string(canSpeak) + " " +
-            to_string(vocabularySize);
+			to_string(vocabularySize) + " " + getOwnerName();
     }
 };
 
@@ -507,6 +512,126 @@ public:
     }
 };
 
+string trim(const string& text) { // funkcja pomocnicza do usuwania spacji z początku i końca stringa, żeby nie było problemów z wczytywaniem komend
+    int start = 0;
+    int end = text.length() - 1;
+
+    while (start < text.length() && isspace(text[start])) {
+        start++;
+    }
+
+    while (end >= start && isspace(text[end])) {
+        end--;
+    }
+
+    if (start > end) {
+        return "";
+    }
+
+    return text.substr(start, end - start + 1);
+}
+
+string toUpperString(string text) { // funkcja pomocnicza do zamiany stringa na wielkie litery, żeby nie było problemów z wczytywaniem komend niezależnie od tego, czy użytkownik wpisze je wielkimi czy małymi literami
+    for (char& ch : text) {
+        ch = toupper(ch);
+    }
+
+    return text;
+}
+
+string normalizeKey(string text) { // funkcja pomocnicza do normalizacji kluczy, czyli usuwania spacji i zamiany na małe litery, żeby nie było problemów z wczytywaniem nazw klas niezależnie od tego, czy użytkownik wpisze je z dużymi literami i spacjami czy bez
+    string result = "";
+    for (int i = 0; i < text.length(); i++) {
+        char ch = text[i]; // pobieramy aktualny znak dla każdego znaku w stringu, 
+
+        if (!isspace(ch)) { //sprawdzamy czy nie jest spacją,
+            result = result + (char)tolower(ch); // jeśli nie jest, to dodajemy go do wyniku po zamianie na małą liter
+        }
+    }
+
+    return result;
+}
+
+string normalizeClassName(string input) {
+    string key = normalizeKey(input);
+
+    if (key == "pet") {
+        return "Pet";
+    }
+    else if (key == "dog") {
+        return "Dog";
+    }
+    else if (key == "poodle") {
+        return "Poodle";
+    }
+    else if (key == "goldenretriever") {
+        return "GoldenRetriever";
+    }
+    else if (key == "cat") {
+        return "Cat";
+    }
+    else if (key == "domesticshorthair") {
+        return "DomesticShorthair";
+    }
+    else if (key == "ragdoll") {
+        return "Ragdoll";
+    }
+    else if (key == "spider") {
+        return "Spider";
+    }
+    else if (key == "jumpingspider") {
+        return "JumpingSpider";
+    }
+    else if (key == "parrot") {
+        return "Parrot";
+    }
+
+    return "";
+}
+
+struct ParsedCommand {
+    string command;
+    string argument;
+};
+
+ParsedCommand parseCommandLine(string line) {
+    line = trim(line); // usuwamy spacje z początku i końca, żeby nie było problemów z wczytywaniem komend
+
+    ParsedCommand result; // tworzymy strukturę, która będzie przechowywać rozdzieloną komendę i argument
+    result.command = "";
+    result.argument = "";
+
+    if (line == "") { // jeśli po usunięciu spacji linia jest pusta, to zwracamy pustą komendę
+        return result;
+    }
+
+    stringstream ss(line); //stringstream to klasa, która pozwala traktować string jak strumień danych, żeby łatwo rozdzielić komendę od argumentu
+
+    ss >> result.command; // wczytujemy pierwsze słowo jako komendę
+    result.command = toUpperString(result.command); // zamieniamy komendę na wielkie litery
+
+    string rest; // wczytujemy resztę linii jako argument, jeśli jest jakiś
+    getline(ss, rest); // wczytujemy resztę linii do zmiennej rest
+
+    result.argument = trim(rest); // usuwamy spacje z początku i końca argumentu, żeby nie było problemów z wczytywaniem argumentów
+
+    return result;
+}
+
+bool isValidCommand(string command) {
+    vector<string> validCommands = {
+        "SAVE", "READ", "DIR", "TREE", "SHOW", "DO", "MDO", "CD", "MO", "EXIT"
+    };
+
+    for (const string& cmd : validCommands) {
+        if (command == cmd) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 ClassNode* buildClassTree() {
     ClassNode* pet = new ClassNode("Pet");
 
@@ -548,7 +673,7 @@ void printTree(ClassNode* node, int depth = 0) {
         cout << "   ";
     }
 
-    cout << node->getName() << endl;
+    cout << node->getName() <<endl;
 
     for (ClassNode* child : node->getChildren()) {
         printTree(child, depth + 1);
@@ -575,15 +700,23 @@ ClassNode* findNode(ClassNode* node, string name) {
     return nullptr;
 }
 
-void changeDirectory(ClassNode* root, ClassNode*& currentNode, string nodeName) {
-    ClassNode* found = findNode(root, nodeName);
+void cd(ClassNode* root, ClassNode*& currentNode, string nodeName) {
+    string normalizedName = normalizeClassName(nodeName);
+
+    if (normalizedName == "") {
+        cout << "Class node not found.\n";
+        cout << "Available class names: Pet, Dog, Poodle, GoldenRetriever, Cat, DomesticShorthair, Ragdoll, Spider, JumpingSpider, Parrot.\n";
+        return;
+    }
+
+    ClassNode* found = findNode(root, normalizedName);
 
     if (found != nullptr) {
         currentNode = found;
         cout << "Current node: " << currentNode->getName() << endl;
     }
     else {
-        cout << "Class node not found.\n";
+        cout << "Class node not found." << endl;
     }
 }
 
@@ -614,6 +747,165 @@ public:
         pets.push_back(pet);
     }
 
+    Pet* createPetForCurrentNode(ClassNode* currentNode, string name) {
+        if (currentNode == nullptr) {
+            cout << "No current node.\n";
+            return nullptr;
+        }
+
+        if (!currentNode->isLeaf()) {
+            cout << "Objects can only be created in leaf classes.\n";
+            return nullptr;
+        }
+
+        string type = currentNode->getName();
+
+        Pet* created = nullptr;
+
+            if (type == "Poodle") {
+                int age;
+                bool friendly;
+                string toy;
+                string haircut;
+                bool showDog;
+                string owner;
+
+                cout << "Age: ";
+                cin >> age;
+                cout << "Friendly? 1/0: ";
+                cin >> friendly;
+                cout << "Favourite toy: ";
+                cin >> toy;
+                cout << "Haircut: ";
+                cin >> haircut;
+                cout << "Show dog? 1/0: ";
+                cin >> showDog;
+                cout << "Owner name: ";
+                cin >> owner;
+
+                created = new Poodle(name, age, owner, friendly, toy, haircut, showDog);
+            }
+            else if (type == "GoldenRetriever") {
+                int age;
+                bool friendly;
+                string toy;
+                bool likesSwimming;
+                int fetchSkill;
+                string owner;
+
+                cout << "Age: ";
+                cin >> age;
+                cout << "Friendly? 1/0: ";
+                cin >> friendly;
+                cout << "Favourite toy: ";
+                cin >> toy;
+                cout << "Likes swimming? 1/0: ";
+                cin >> likesSwimming;
+                cout << "Fetch skill (int): ";
+                cin >> fetchSkill;
+                cout << "Owner name: ";
+                cin >> owner;
+
+                created = new GoldenRetriever(name, age, owner, friendly, toy, likesSwimming, fetchSkill);
+            }
+            else if (type == "DomesticShorthair") {
+                int age;
+                int livesLeft;
+                bool likesBoxes;
+                string furColour;
+                bool livesOutdoors;
+                string owner;
+
+                cout << "Age: ";
+                cin >> age;
+                cout << "Lives left: ";
+                cin >> livesLeft;
+                cout << "Likes boxes? 1/0: ";
+                cin >> likesBoxes;
+                cout << "Fur colour: ";
+                cin >> furColour;
+                cout << "Lives outdoors? 1/0: ";
+                cin >> livesOutdoors;
+                cout << "Owner name: ";
+                cin >> owner;
+
+                created = new DomesticShorthair(name, age, owner, livesLeft, likesBoxes, furColour, livesOutdoors);
+            }
+            else if (type == "Ragdoll") {
+                int age;
+                int livesLeft;
+                bool likesBoxes;
+                bool likesCuddles;
+                int floppiness;
+                string owner;
+
+                cout << "Age: ";
+                cin >> age;
+                cout << "Lives left: ";
+                cin >> livesLeft;
+                cout << "Likes boxes? 1/0: ";
+                cin >> likesBoxes;
+                cout << "Likes cuddles? 1/0: ";
+                cin >> likesCuddles;
+                cout << "Floppiness (1-10): ";
+                cin >> floppiness;
+                cout << "Owner name: ";
+                cin >> owner;
+
+                created = new Ragdoll(name, age, owner, livesLeft, likesBoxes, likesCuddles, floppiness);
+            }
+            else if (type == "JumpingSpider") {
+                int age;
+                bool venomous;
+                int legSpan;
+                int jumpDistance;
+                bool sentient;
+                string owner;
+
+                cout << "Age: ";
+                cin >> age;
+                cout << "Venomous to humans? 1/0: ";
+                cin >> venomous;
+                cout << "Leg span: ";
+                cin >> legSpan;
+                cout << "Jump distance: ";
+                cin >> jumpDistance;
+                cout << "Sentient? 1/0: ";
+                cin >> sentient;
+                cout << "Owner name: ";
+                cin >> owner;
+
+                created = new JumpingSpider(name, age, owner, venomous, legSpan, jumpDistance, sentient);
+            }
+            else if (type == "Parrot") {
+                int age;
+                bool canSing;
+                bool canSpeak;
+                int vocab;
+                string owner;
+
+                cout << "Age: ";
+                cin >> age;
+                cout << "Can sing? 1/0: ";
+                cin >> canSing;
+                cout << "Can speak? 1/0: ";
+                cin >> canSpeak;
+                cout << "Vocabulary size: ";
+                cin >> vocab;
+                cout << "Owner name: ";
+                cin >> owner;
+
+                created = new Parrot(name, age, owner, canSing, canSpeak, vocab);
+            }
+
+            if (created == nullptr) {
+                cout << "Unknown pet type.\n";
+            }
+
+            return created;
+    }
+
+
     Pet* findPetByName(string name) {
         for (Pet* pet : pets) {
             if (pet->getName() == name) {
@@ -622,6 +914,40 @@ public:
         }
 
         return nullptr;
+    }
+
+    void deletePetByName(string name, ClassNode* currentNode) {
+        if (!currentNode->isLeaf()) {
+            cout << "Objects can only be deleted in leaf classes.\n";
+            return;
+        }
+
+        for (auto it = pets.begin(); it != pets.end(); ++it) {
+            if ((*it)->getName() == name && (*it)->getType() == currentNode->getName()) {
+                delete *it;
+                pets.erase(it);
+                cout << "Pet deleted.\n";
+                return;
+            }
+        }
+
+        cout << "Pet not found in current leaf.\n";
+    }
+
+    void modifyPetByName(string name, ClassNode* currentNode) {
+        if (!currentNode->isLeaf()) {
+            cout << "Objects can only be modified in leaf classes.\n";
+            return;
+        }
+
+		for (auto it = pets.begin(); it != pets.end(); ++it) { //it = iterator, czyli wskaźnik do elementu wektora, który możemy przesuwać i modyfikować
+            if ((*it)->getName() == name && (*it)->getType() == currentNode->getName()) {
+                (*it)->modify();
+                return;
+            }
+        }
+
+        cout << "Pet not found in current leaf.\n";
     }
 
     void showPetByName(string name) {
@@ -644,9 +970,11 @@ public:
     void dir(ClassNode* currentNode) {
         bool foundAny = false;
 
+        cout << "Pets visible from current node: " << endl;
+
         for (Pet* pet : pets) {
             if (containsType(currentNode, pet->getType())) {
-                cout << pet->getName()
+                cout << "- " << pet->getName()
                     << " (" << pet->getType() << ")"
                     << ", owner: " << pet->getOwnerName()
                     << endl;
@@ -660,69 +988,287 @@ public:
         }
     }
 
-    ~PetManager() {
-        for (Pet* pet : pets) {
-            delete pet;
+    void saveToFile(string filename) {
+		ofstream file(filename); // ofstream to klasa do zapisywania danych do pliku
+
+        if (!file) {
+            cout << "Could not open file for writing.\n";
+            return;
         }
+
+        for (Pet* pet : pets) {
+			file << pet->serialize() << endl; // znaki << zapisują dane do pliku, a pet->serialize() zwraca stringa z danymi peta w formacie, który można potem łatwo odczytać
+        }
+
+        file.close();
+        cout << "Saved to " << filename << endl;
+    }
+
+    void readFromFile(string filename) {
+		ifstream file(filename); // ifstream to klasa do wczytywania danych z pliku
+
+        if (!file) {
+            cout << "Could not open file.\n";
+            return;
+        }
+
+        clearPets();
+
+        string type;
+
+        while (file >> type) { // tworzenie obiektow zależnie od typu
+            if (type == "Poodle") {
+                string name, owner, toy, haircut;
+                int age;
+                bool friendly, showDog;
+                file >> name >> age >> friendly >> toy >> haircut >> showDog >> owner;
+                addPet(new Poodle(name, age, owner, friendly, toy, haircut, showDog));
+            }
+            else if (type == "GoldenRetriever") {
+                string name, owner, toy;
+                int age, fetchSkill;
+                bool friendly, likesSwimming;
+                file >> name >> age >> friendly >> toy >> likesSwimming >> fetchSkill >> owner;
+                addPet(new GoldenRetriever(name, age, owner, friendly, toy, likesSwimming, fetchSkill));
+            }
+            else if (type == "DomesticShorthair") {
+                string name, owner, furColour;
+                int age, livesLeft;
+                bool likesBoxes, livesOutdoors;
+                file >> name >> age >> livesLeft >> likesBoxes >> furColour >> livesOutdoors >> owner;
+                addPet(new DomesticShorthair(name, age, owner, livesLeft, likesBoxes, furColour, livesOutdoors));
+            }
+            else if (type == "Ragdoll") {
+                string name, owner;
+                int age, livesLeft, floppiness;
+                bool likesBoxes, likesCuddles;
+                file >> name >> age >> livesLeft >> likesBoxes >> likesCuddles >> floppiness >> owner;
+                addPet(new Ragdoll(name, age, owner, livesLeft, likesBoxes, likesCuddles, floppiness));
+            }
+            else if (type == "JumpingSpider") {
+                string name, owner;
+                int age, legSpan, jumpDistance;
+                bool venomousToHumans, sentient;
+                file >> name >> age >> venomousToHumans >> legSpan >> jumpDistance >> sentient >> owner;
+                addPet(new JumpingSpider(name, age, owner, venomousToHumans, legSpan, jumpDistance, sentient));
+            }
+            else if (type == "Parrot") {
+                string name, owner;
+                int age,vocab;
+                bool canSing , canSpeak;
+                file >> name >> age>> canSing>> canSpeak>> vocab>>owner;
+                addPet(new Parrot(name ,age ,owner ,canSing ,canSpeak ,vocab));
+			}
+
+
+        }
+
+        file.close();
+        cout << "Loaded from " << filename << endl;
+    }
+
+    void clearPets() {
+        for (Pet* pet : pets) {
+            delete pet; 
+        }
+
+		pets.clear(); // usuwamy wszystkie wskaźniki z wektora po usunięciu obiektów, żeby nie było wiszących wskaźników
+    }
+
+    ~PetManager() {
+        clearPets();
     }
 };
 
-/*
 
-Program ma umożliwiać poruszanie się w strukturze klas z linii komend. Nazwy komend
-które należy zaimplementować to:
-● CD [nazwa węzła(klasy)]- zmiana węzła w strukturze
-● MO [obiekt] - tworzy obiekt o nazwie „obiekt” dla bieżącego liścia– należy podać
-parametry obiektu
-● DO [obiekt] - usuwa obiekt o nazwie „obiekt”dla bieżącego liścia
-● MDO [obiekt] - modyfikacja obiektu o nazwie „obiekt”dla bieżącego liścia
-● DIR - wyświetla informacje o obiektach widocznych z danego poziomu - domyślnie
-tylko informacje o nazwach obiektów (wyświetla listę wszystkich obiektów należących
-do liści, które dziedziczą z danej klasy
-● SHOW [obiekt] – wyświetla szczegółowe informacje o obiekcie
-● SAVE – zapis zbioru do pliku
-● READ – odczyt zbioru z pliku
-● TREE - wyświetla całą strukturę przedstawioną na rysunku np. w formie wcięć
+ 
+void menu() {
+    cout << "Command format: COMMAND optional_argument\n\n";
 
-*/
+    cout << "Available commands:\n";
+    cout << "TREE                  - show class hierarchy\n";
+    cout << "DIR                   - list pets visible from current class node\n";
+    cout << "CD [class]            - change current class node\n";
+	cout << "SHOW [pet_name]       - show details of a pet, must be visible from current class node\n";
+    cout << "MO [pet_name]         - create a new pet in the current leaf class\n";
+    cout << "DO [pet_name]         - delete a pet from the current leaf class\n";
+    cout << "MDO [pet_name]        - modify a pet from the current leaf class\n";
+    cout << "SAVE [file_name]      - save pets to a file\n";
+    cout << "READ [file_name]      - read pets from a file\n";
+    cout << "EXIT                  - exit the program\n\n";
 
+    cout << "Examples:\n";
+    cout << "CD golden retriever\n";
+    cout << "CD Domestic Shorthair\n";
+    cout << "DIR\n";
+    cout << "SHOW Fifi\n";
+    cout << "SAVE pets.txt\n\n";
+
+    cout << "Notes:\n";
+    cout << "- Creating, deleting and modifying pets is possible only in leaf classes.\n";
+    cout << "- Leaf classes: Parrot, Poodle, GoldenRetriever, DomesticShorthair, Ragdoll, JumpingSpider.\n";
+    cout << "- For yes/no questions, enter 1 for yes and 0 for no.\n";
+    cout << "- Use one-word values or underscores instead of spaces, e.g. rubber_ball, Anna_Kowalska.\n\n";
+}
+
+void waitForEnter() {
+    cout << "Press Enter to continue...";
+    cin.clear(); 
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+    cin.get(); 
+}
 
 int main() {
     ClassNode* root = buildClassTree();
     ClassNode* currentNode = root;
-
     PetManager manager;
-
     manager.addPet(new Poodle("Fifi", 3, "Anna", true, "ball", "curly", true));
     manager.addPet(new GoldenRetriever("Max", 5, "Kuba", true, "stick", true, 8));
     manager.addPet(new DomesticShorthair("Mika", 4, "Ola", 9, true, "black", false));
-    manager.addPet(new Ragdoll("Luna", 2, "Marta", 9, true, true, 10));
     manager.addPet(new JumpingSpider("Portia", 1, "Tomasz", false, 2, 15, true));
-    manager.addPet(new Parrot("Polly", 6, "Karolina", true, true, 50));
 
-    cout << "TREE:\n";
-    printTree(root);
+    cout << "Welcome to the Pet Database program!\n";
+    cout << "Sample pets have been loaded automatically.\n";
+    cout << "Use DIR to see pets visible from the current class node.\n";
+    cout << "Use TREE to see the full class hierarchy.\n";
+    cout << "Press Enter to start...";
+    cin.get();
 
-    cout << "\nDIR from Pet:\n";
-    manager.dir(currentNode);
+    string line;
 
-    cout << "\nCD Dog:\n";
-    changeDirectory(root, currentNode, "Dog");
+    while (true) {
+        system("cls");
+        menu();
 
-    cout << "\nDIR from Dog:\n";
-    manager.dir(currentNode);
+        cout << "Current class node: " << currentNode->getName();
 
-    cout << "\nCD Cat:\n";
-    changeDirectory(root, currentNode, "Cat");
+        if (currentNode->isLeaf()) {
+            cout << " (leaf - you can create/delete/modify pets here)";
+        }
+        else {
+            cout << " (not a leaf - DIR and CD available, but not MO/DO/MDO)";
+        }
 
-    cout << "\nDIR from Cat:\n";
-    manager.dir(currentNode);
+        cout << "\n> ";
+        getline(cin, line);
 
-    cout << "\nCD Poodle:\n";
-    changeDirectory(root, currentNode, "Poodle");
+        ParsedCommand parsed = parseCommandLine(line);
 
-    cout << "\nDIR from Poodle:\n";
-    manager.dir(currentNode);
+        string command = parsed.command;
+        string argument = parsed.argument;
+
+        if (!isValidCommand(command)) {
+            cout << "Unknown command.\n";
+            waitForEnter();
+            continue;
+        }
+
+        if (command == "TREE") {
+            printTree(root);
+            waitForEnter();
+        }
+
+        else if (command == "SAVE") {
+            if (argument == "") {
+                cout << "Missing file name.\n";
+                cout << "Example: SAVE pets.txt\n";
+            }
+            else {
+                manager.saveToFile(argument);
+            }
+
+            waitForEnter();
+        }
+
+        else if (command == "READ") {
+            if (argument == "") {
+                cout << "Missing file name.\n";
+                cout << "Example: READ pets.txt\n";
+            }
+            else {
+                manager.readFromFile(argument);
+            }
+
+            waitForEnter();
+        }
+
+        else if (command == "DIR") {
+            manager.dir(currentNode);
+            waitForEnter();
+        }
+
+        else if (command == "CD") {
+            if (argument == "") {
+                cout << "Missing class name.\n";
+                cout << "Example: CD golden retriever\n";
+            }
+            else {
+                cd(root, currentNode, argument);
+            }
+
+            waitForEnter();
+        }
+
+        else if (command == "SHOW") {
+            if (argument == "") {
+                cout << "Missing pet name.\n";
+                cout << "Example: SHOW Fifi\n";
+            }
+            else {
+                manager.showPetByName(argument);
+            }
+
+            waitForEnter();
+        }
+
+        else if (command == "MDO") {
+            if (argument == "") {
+                cout << "Missing pet name.\n";
+                cout << "Example: MDO Max\n";
+            }
+            else {
+                manager.modifyPetByName(argument, currentNode);
+            }
+
+            waitForEnter();
+        }
+
+        else if (command == "DO") {
+            if (argument == "") {
+                cout << "Missing pet name.\n";
+            }
+            else {
+                manager.deletePetByName(argument, currentNode);
+            }
+
+            waitForEnter();
+        }
+
+        else if (command == "MO") {
+            if (argument == "") {
+                cout << "Missing pet name.\n";
+                cout << "Example: MO Portia\n";
+            }
+            else if (!currentNode->isLeaf()) {
+                cout << "Objects can only be created in leaf nodes.\n";
+            }
+            else {
+                Pet* newPet = manager.createPetForCurrentNode(currentNode, argument);
+
+                if (newPet != nullptr) {
+                    manager.addPet(newPet);
+                    cout << "Pet created and added.\n";
+                }
+            }
+
+            waitForEnter();
+        }
+
+        else if (command == "EXIT") {
+            cout << "Exiting program. Goodbye!\n";
+            break;
+            }
+    }
 
     delete root;
 
